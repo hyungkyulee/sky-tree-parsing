@@ -15,12 +15,19 @@ namespace TreeParsing
             if (string.IsNullOrEmpty(input))
                 return;
 
-            var inputNumbers = input.Split(",").Select(int.Parse);
-            var tree = new Tree(inputNumbers);
-            var postOrderedNumbers = tree.Traverse();
+            try
+            {
+                var inputNumbers = input.Split(",").Select(int.Parse);
+                var tree = new Tree(inputNumbers);
+                var postOrderedNumbers = tree.Traverse();
 
-            var output = string.Join(",", postOrderedNumbers.Select(n => n.ToString()));
-            Console.WriteLine(output);
+                var output = string.Join(",", postOrderedNumbers.Select(n => n.ToString()));
+                Console.WriteLine(output);
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine($"{e} : \n>> please check your input is {input}");
+            }
         }
     }
 }
